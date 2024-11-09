@@ -2,6 +2,7 @@
 
 #include "window.hpp"
 #include "../graphics_pipeline/pipeline.hpp"
+#include "../vulkan_code/lve_device.hpp"
 
 namespace lve
 {
@@ -13,7 +14,8 @@ namespace lve
 
         void run();
     private:
-        LveWindow lveWindow {WIDTH, HEIGHT, "game engine window"};
-        Pipeline pipeline {"shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv"};
+        LveWindow window {WIDTH, HEIGHT, "game engine window"};
+        LveDevice device { window };
+        Pipeline pipeline {device, "shaders/simple_shader.vert.spv", "shaders/simple_shader.frag.spv", Pipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};
     };
 };

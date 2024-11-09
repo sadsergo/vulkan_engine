@@ -4,7 +4,7 @@ namespace lve
 {
     void App::run()
     {
-        while (!lveWindow.shouldClose())
+        while (!window.shouldClose())
         {
             glfwPollEvents();
         }
