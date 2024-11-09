@@ -5,6 +5,7 @@
 #include <cstdint>
 
 #include "../vulkan_code/lve_device.hpp"
+#include "../model/model.hpp"
 
 namespace lve
 {
@@ -12,7 +13,6 @@ namespace lve
     {
         VkViewport viewport;
         VkRect2D scissor;
-        VkPipelineViewportStateCreateInfo viewportInfo;
         VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
         VkPipelineRasterizationStateCreateInfo rasterizationInfo;
         VkPipelineMultisampleStateCreateInfo multisampleInfo;
@@ -37,6 +37,7 @@ namespace lve
         Pipeline(const Pipeline &) = delete;
         void operator=(const Pipeline &) = delete;
 
+        void bind(VkCommandBuffer comandBuffer);
         static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);
 
     private:
