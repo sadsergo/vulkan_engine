@@ -13,6 +13,7 @@ add_executable(engine
                     src/glfw_extensions/window.cpp 
                     src/glfw_extensions/app.cpp 
                     src/graphics_pipeline/pipeline.cpp 
+                    src/renderer/renderer.cpp
 
                     src/vulkan_code/lve_device.cpp 
                     src/vulkan_code/lve_swap_chain.cpp

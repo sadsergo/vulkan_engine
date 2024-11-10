@@ -36,7 +36,7 @@ namespace lve {
     void recordCommandBuffer(int imageIndex);
     void renderGameObjects(VkCommandBuffer commandBuffer);
 
-    LveWindow lveWindow{WIDTH, HEIGHT, "Vulkan Tutorial"};
+    LveWindow lveWindow{WIDTH, HEIGHT, "Game Engine"};
     LveDevice lveDevice{lveWindow};
     std::unique_ptr<LveSwapChain> lveSwapChain;
     std::unique_ptr<LvePipeline> lvePipeline;
