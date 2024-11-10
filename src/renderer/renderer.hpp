@@ -9,25 +9,42 @@
 // std
 #include <memory>
 #include <vector>
+#include <cassert>
 
 namespace lve {
   class Renderer {
   public:
-    Renderer(LveWindow& window, LveDevice& device) : lveWindow(window), lveDevice(device) {}
+    Renderer(LveWindow& window, LveDevice& device);
     ~Renderer();
 
     Renderer(const Renderer &) = delete;
     Renderer &operator=(const Renderer &) = delete;
 
+    VkRenderPass getSwapChainRenderPass() const { return lveSwapChain->getRenderPass(); }
+    bool isFrameInProgress() const { return isFrameStarted; }
+    VkCommandBuffer 
+    getCurrentCommandBuffer() const 
+    {
+      assert(isFrameStarted && "Cannot get comand buffer when frame not in progress"); 
+      return commandBuffers[currentImageIndex]; 
+    }
+
+    VkCommandBuffer beginFrame();
+    void endFrame();
+    void beginSwapChainRnederPass(VkCommandBuffer commandBuffer);
+    void endSwapChainRnederPass(VkCommandBuffer commandBuffer);
+
   private:
     void createCommandBuffers();
     void freeCommandBuffers();
-    void drawFrame();
     void recreateSwapChain();
 
-    LveWindow&lveWindow;
-    LveDevice& lveDevice;
+    LveWindow&window;
+    LveDevice& device;
     std::unique_ptr<LveSwapChain> lveSwapChain;
     std::vector<VkCommandBuffer> commandBuffers;
+
+    uint32_t currentImageIndex;
+    bool isFrameStarted = false;
   };
 };
