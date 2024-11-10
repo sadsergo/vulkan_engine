@@ -4,6 +4,7 @@
 #include "../model/model.hpp"
 #include "../graphics_pipeline/pipeline.hpp"
 #include "../vulkan_code/lve_swap_chain.hpp"
+#include "../game_object/game_object.hpp"
 #include "window.hpp"
 
 // std
@@ -25,7 +26,7 @@ namespace lve {
     void run();
 
   private:
-    void loadModels();
+    void loadGameObjects();
     void createPipelineLayout();
     void createPipeline();
     void createCommandBuffers();
@@ -33,6 +34,7 @@ namespace lve {
     void drawFrame();
     void recreateSwapChain();
     void recordCommandBuffer(int imageIndex);
+    void renderGameObjects(VkCommandBuffer commandBuffer);
 
     LveWindow lveWindow{WIDTH, HEIGHT, "Vulkan Tutorial"};
     LveDevice lveDevice{lveWindow};
@@ -40,6 +42,6 @@ namespace lve {
     std::unique_ptr<LvePipeline> lvePipeline;
     VkPipelineLayout pipelineLayout;
     std::vector<VkCommandBuffer> commandBuffers;
-    std::unique_ptr<LveModel> lveModel;
+    std::vector<GameObject> gameObjects;
   };
 };

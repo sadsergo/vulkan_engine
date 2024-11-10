@@ -9,14 +9,16 @@ include_directories(prj ${SDL2_INCLUDE_DIRS})
 
 add_executable(engine 
                     src/main.cpp 
+                    
                     src/glfw_extensions/window.cpp 
                     src/glfw_extensions/app.cpp 
-
                     src/graphics_pipeline/pipeline.cpp 
+
                     src/vulkan_code/lve_device.cpp 
                     src/vulkan_code/lve_swap_chain.cpp
 
                     src/model/model.cpp
+                    src/game_object/game_object.cpp
 
                     vk-bootstrap/VkBootstrap.cpp)
 target_link_libraries(engine vulkan glfw)
