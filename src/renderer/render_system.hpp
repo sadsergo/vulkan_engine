@@ -4,38 +4,27 @@
 #include "../model/model.hpp"
 #include "../graphics_pipeline/pipeline.hpp"
 #include "../game_object/game_object.hpp"
-#include "../renderer/renderer.hpp"
-#include "window.hpp"
 
 // std
 #include <memory>
 #include <vector>
 
 namespace lve {
-  class App {
+  class RenderSystem {
   public:
-    static constexpr int WIDTH = 800;
-    static constexpr int HEIGHT = 600;
+    RenderSystem(LveDevice &device, VkRenderPass renderPass);
+    ~RenderSystem();
 
-    App();
-    ~App();
-
-    App(const App &) = delete;
-    App &operator=(const App &) = delete;
-
-    void run();
+    RenderSystem(const RenderSystem &) = delete;
+    RenderSystem &operator=(const RenderSystem &) = delete;
+    void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject> &gameObjects);
 
   private:
-    void loadGameObjects();
     void createPipelineLayout();
-    void createPipeline();
-    void renderGameObjects(VkCommandBuffer commandBuffer);
+    void createPipeline(VkRenderPass renderPass);
 
-    LveWindow window{WIDTH, HEIGHT, "Game Engine"};
-    LveDevice device{window};
-    Renderer renderer {window, device};
+    LveDevice &device;
     std::unique_ptr<LvePipeline> lvePipeline;
     VkPipelineLayout pipelineLayout;
-    std::vector<GameObject> gameObjects;
   };
 };
