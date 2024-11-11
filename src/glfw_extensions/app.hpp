@@ -4,6 +4,7 @@
 #include "../model/model.hpp"
 #include "../game_object/game_object.hpp"
 #include "../renderer/renderer.hpp"
+#include "camera.hpp"
 #include "window.hpp"
 
 // std
