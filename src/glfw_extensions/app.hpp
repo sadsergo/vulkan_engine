@@ -32,6 +32,5 @@ namespace lve {
     LveDevice device {window};
     Renderer renderer {window, device};
     std::vector<GameObject> gameObjects;
-    // Camera camera {};
   };
 };

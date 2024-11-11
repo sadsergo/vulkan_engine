@@ -24,10 +24,15 @@ namespace lve {
   void App::run() 
   {
     RenderSystem renderSystem {device, renderer.getSwapChainRenderPass()};
+    Camera camera {};
 
     while (!window.shouldClose()) {
       glfwPollEvents();
       
+      float aspect = renderer.getAspectRatio();
+      camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
+      // camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 10.f);
+
       if (auto commandBuffer = renderer.beginFrame())
       {
         /*
@@ -37,7 +42,7 @@ namespace lve {
         */
        
         renderer.beginSwapChainRnederPass(commandBuffer);
-        renderSystem.renderGameObjects(commandBuffer, gameObjects);
+        renderSystem.renderGameObjects(commandBuffer, gameObjects, camera);
         renderer.endSwapChainRnederPass(commandBuffer);
         renderer.endFrame();
       }

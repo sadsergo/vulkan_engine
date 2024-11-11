@@ -4,6 +4,7 @@
 #include "../model/model.hpp"
 #include "../graphics_pipeline/pipeline.hpp"
 #include "../game_object/game_object.hpp"
+#include "../glfw_extensions/camera.hpp"
 
 // std
 #include <memory>
@@ -17,7 +18,7 @@ namespace lve {
 
     RenderSystem(const RenderSystem &) = delete;
     RenderSystem &operator=(const RenderSystem &) = delete;
-    void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject> &gameObjects);
+    void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject> &gameObjects, const Camera &camera);
 
   private:
     void createPipelineLayout();
