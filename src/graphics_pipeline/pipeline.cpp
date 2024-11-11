@@ -26,7 +26,7 @@ LvePipeline::~LvePipeline() {
 }
 
 std::vector<char> LvePipeline::readFile(const std::string& filepath) {
-  std::ifstream file{filepath, std::ios::ate | std::ios::binary};
+  std::ifstream file {filepath, std::ios::in || std::ios::ate | std::ios::binary};
 
   if (!file.is_open()) {
     throw std::runtime_error("failed to open file: " + filepath);
