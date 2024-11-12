@@ -13,7 +13,10 @@ add_executable(engine
                     src/glfw_extensions/window.cpp 
                     src/glfw_extensions/app.cpp 
                     src/glfw_extensions/camera.cpp
+                    src/glfw_extensions/keyboard.cpp
+                    
                     src/graphics_pipeline/pipeline.cpp 
+                    
                     src/renderer/renderer.cpp
                     src/renderer/render_system.cpp
 

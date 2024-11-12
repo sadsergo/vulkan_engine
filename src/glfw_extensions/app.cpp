@@ -24,14 +24,17 @@ namespace lve {
   void App::run() 
   {
     RenderSystem renderSystem {device, renderer.getSwapChainRenderPass()};
+    
     Camera camera {};
+    // camera.setViewDirection(glm::vec3{0}, glm::vec3{0.5, 0, 1});
+    camera.setViewTarget(glm::vec3{-1, -2, 2}, glm::vec3{0, 0, 2.5});
 
     while (!window.shouldClose()) {
       glfwPollEvents();
       
       float aspect = renderer.getAspectRatio();
-      camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
-      // camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 10.f);
+      // camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
+      camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 10.f);
 
       if (auto commandBuffer = renderer.beginFrame())
       {
@@ -108,7 +111,7 @@ namespace lve {
       std::shared_ptr<Model> lveModel = createCubeModel(device, {.0f, .0f, .0f});
       auto cube = GameObject::createGameObject();
       cube.model = lveModel;
-      cube.transform.translation = {.0f, .0f, .5f};
+      cube.transform.translation = {.0f, .0f, 2.5f};
       cube.transform.scale = {.5f, .5f, .5f};
       gameObjects.push_back(std::move(cube));
   }
