@@ -4,6 +4,7 @@
 #include <array>
 #include <cassert>
 #include <stdexcept>
+#include <chrono>
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -11,6 +12,7 @@
 #include <glm/gtc/constants.hpp>
 
 #include "../renderer/render_system.hpp"
+#include "keyboard.hpp"
 
 namespace lve {
 
@@ -26,14 +28,22 @@ namespace lve {
     RenderSystem renderSystem {device, renderer.getSwapChainRenderPass()};
     
     Camera camera {};
-    // camera.setViewDirection(glm::vec3{0}, glm::vec3{0.5, 0, 1});
-    camera.setViewTarget(glm::vec3{-1, -2, 2}, glm::vec3{0, 0, 2.5});
+    auto viewerObject = GameObject::createGameObject();
+    KeyboardMovementController cameraController {};
+
+    auto currentTime = std::chrono::high_resolution_clock::now();
 
     while (!window.shouldClose()) {
       glfwPollEvents();
       
+      auto newTime = std::chrono::high_resolution_clock::now();
+      float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+      currentTime = newTime;
+
+      cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, viewerObject);
+      camera.setViewYXZ(viewerObject.transform.translation, viewerObject.transform.rotation);
+
       float aspect = renderer.getAspectRatio();
-      // camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
       camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 10.f);
 
       if (auto commandBuffer = renderer.beginFrame())
