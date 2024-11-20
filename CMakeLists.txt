@@ -26,6 +26,8 @@ add_executable(engine
                     src/model/model.cpp
                     src/game_object/game_object.cpp
 
+                    src/utils/utils.cpp
+
                     vk-bootstrap/VkBootstrap.cpp)
 target_link_libraries(engine vulkan glfw)
 target_include_directories(engine PUBLIC vk-bootstrap)
