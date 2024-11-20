@@ -5,7 +5,9 @@
 #include <iostream>
 #include <stdexcept>
 
-int main() {
+int 
+main() 
+{
   lve::App app{};
 
   try 
