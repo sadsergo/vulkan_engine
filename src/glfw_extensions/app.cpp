@@ -65,10 +65,10 @@ namespace lve {
   }
 
   void App::loadGameObjects() {
-      std::shared_ptr<Model> lveModel = Model::createModelFromFile(device, "/home/sergei/Desktop/vulkan/vulkan_engine/models/smooth_vase.obj");
+      std::shared_ptr<Model> lveModel = Model::createModelFromFile(device, "models/smooth_vase.obj");
       auto gameObj = GameObject::createGameObject();
       gameObj.model = lveModel;
-      gameObj.transform.translation = {.0f, .0f, 2.5f};
+      gameObj.transform.translation = {.0f, .5f, 2.5f};
       gameObj.transform.scale = glm::vec3(3);
       gameObjects.push_back(std::move(gameObj));
   }
