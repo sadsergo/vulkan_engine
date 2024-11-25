@@ -29,6 +29,8 @@ add_executable(engine
             src/model/model.cpp
             src/game_object/game_object.cpp
 
+            src/uniform_buffer/buffer.cpp
+
             vk-bootstrap/VkBootstrap.cpp
 )
 

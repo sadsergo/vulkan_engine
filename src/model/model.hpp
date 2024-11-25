@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../vulkan_code/lve_device.hpp"
+#include "../uniform_buffer/buffer.hpp"
 
 // libs
 #define GLM_FORCE_RADIANS
@@ -48,13 +49,12 @@ namespace lve {
     void createIndexBuffer(const std::vector<uint32_t> &indices);
 
     LveDevice &device;
-    VkBuffer vertexBuffer;
-    VkDeviceMemory vertexBufferMemory;
+
+    std::unique_ptr<Buffer> vertexBuffer;
     uint32_t vertexCount;
 
     bool hasIndexBuffer = false;
-    VkBuffer indexBuffer;
-    VkDeviceMemory indexBufferMemory;
+    std::unique_ptr<Buffer> indexBuffer;
     uint32_t indexCount;
   };
 };
