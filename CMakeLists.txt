@@ -4,7 +4,7 @@ project(engine)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if (LINUX)
+if (UNIX)
 find_package(glfw3 REQUIRED)
 else()
 find_package(Vulkan REQUIRED)
@@ -32,7 +32,7 @@ add_executable(engine
             vk-bootstrap/VkBootstrap.cpp
 )
 
-if (LINUX)
+if (UNIX)
 target_link_libraries(engine vulkan glfw)
 else()
 
